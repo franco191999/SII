@@ -1,0 +1,39 @@
+<template>
+  <div>
+
+  </div>
+</template>
+
+<script>
+const axios = require('axios')
+  export default {
+    head(){
+      return{
+        title:'Enlaces Institucionales | Sistema Integral Informático',
+        titleTemplate:'',
+      }
+    },
+    created(){ this.initialize()},
+
+    data() {
+      return {
+        
+      }
+    },
+
+    methods:{
+      async initialize() {
+        //Seguridad, evita que un usuario acceda sin estar logueado y tambien si el usuario logueado tiene acceso o no al sitio
+          if(sessionStorage.getItem("usuario")==null){this.$router.push({path:'/', replace:true})}
+          else if(sessionStorage.getItem("unidad_organizativa")!="Informática"){
+              this.$router.push({path:'/panel', replace:true})
+              alert("Acceso denegado. Usted no está autorizado a acceder a este recurso")
+            }
+        }
+    }  
+}
+</script>
+
+<style>
+
+</style>

@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+{%block menu%}
+
+
+
+<div class="col-md-2 left-sidebar">
+
+<!-- main-nav -->
+	<nav class="main-nav">
+
+	<ul class="main-menu">
+	<li class={%block Inicio%}""{%endblock%}><a href="/"><i class="fa fa-home fa-lg"></i><span class="text">Inicio</span></a></li>
+
+{%if request.session.organizativa == 'Planificación' %}	
+	<li class={%block Estructura%}""{%endblock%}>
+	<a href="/listalavanderia"><i class="fa fa-cog fa-lg"></i><span class="text"> Lavanderia</span></a>
+	<a href="/listaalimentos"><i class="fa fa-glass fa-lg"></i><span class="text"> Almacen de Alimentos</span></a>
+	<a href="#" class="js-sub-menu-toggle"><i class="fa fa-th fa-lg"></i><span class="text">Estructura</span><i class="toggle-icon fa fa-angle-left"></i></a>
+
+	<ul class="sub-menu {%block open_Estructura%}{%endblock%}">
+	<li class={%block Unidad%}""{%endblock%}><a href="/lista_unidad"><i class="fa fa-home fa-lg"></i><span class="text">Unidad</span></a></li>
+	</ul>
+	</li>
+{%endif%}
+
+
+{%if request.session.organizativa == 'Informática' %}
+	<li class={%block mensaje%}""{%endblock%}><a href="/contacto"><i class="fa fa-comments-o fa-lg"></i><span class="text">Mensajes</span></a></li>
+	<li  class={%block Departamento%}""{%endblock%}><a href="/lista_departamento"><i class="fa fa-bookmark fa-lg"></i><span class="text">Departamentos</span></a></li>
+	<li class={%block Plazas%}""{%endblock%}><a href="/lista_plaza_departamento"><i class="fa fa-user fa-lg"></i><span class="text">Plazas</span></a></li>
+	<li class={%block rrhh%}""{%endblock%}><a href="/lista_trabajador"><i class="fa fa-group fa-lg"></i><span class="text">Recursos Humanos</span></a></li>
+	<li class={%block distribucion%}""{%endblock%}><a href="/distribucion"><i class="fa fa-bullhorn fa-lg"></i><span class="text">Distribución</span> <i class="fa fa-star fa-spin fa-lg"></i></a></li>
+	
+
+
+	<li class="{%block Equipamiento%}{%endblock%}"><a href="#" class="js-sub-menu-toggle"><i class="fa fa-desktop fa-lg"></i><span class="text">Equipamiento</span><i class="toggle-icon fa fa-angle-left"></i></a>
+	<ul class="sub-menu {%block open_Equipamiento%}{%endblock%}">
+	<li class="{%block Equipamiento_inf%}{%endblock%}"><a href="/equipamiento?id=pc"><span class="text">Informático</span></a></li>
+
+	{%if request.session.radio == 'tiene' %}<li class="{%block radio_inf%}{%endblock%}"><a href="/listar_radio?id=fija"><span class="text">Radiocomunicaciones</span></a></li>
+	{%endif%}
+
+	<li class="{%block telefonos%}{%endblock%}"><a href="/listar_telefonia?id=pizarra"><span class="text">Telefon&iacute;a</span></a></li>
+
+	</ul>
+	</li>
+
+	<li class={%block carpetas%}""{%endblock%}><a href="#" class="js-sub-menu-toggle"><i class="fa fa-folder-open-o fa-lg"></i><span class="text">Carpeta</span><i class="toggle-icon fa fa-angle-left"></i></a>
+	<ul class="sub-menu {%block open_tareas%}{%endblock%}">
+	<li class={%block tareas%}""{%endblock%}><a href="/tareas"><span class="text">Tareas</span></a></li>
+	<li class={%block documentos%}""{%endblock%}><a href="/documentos"><span class="text">Documentos</span></a></li>
+	<li class={%block conectividad%}""{%endblock%}><a href="/conectividad"><span class="text">Conectividad</span></a></li>
+	<li class={%block aplicaciones%}""{%endblock%}><a href="/aplicaciones"><span class="text">Aplicaciones</span></a></li>
+	</ul>
+	</li>
+	
+{%if request.session.presupuesto %}
+
+	<li class={%block presupuesto%}""{%endblock%}>
+	<a href="/presupuesto"><i class="fa fa-money fa-lg"></i>
+	<span class="text">Presupuesto</span>
+	</a>
+	</li>
+{%endif%}
+
+
+	
+	<li class={%block Inspeccion%}""{%endblock%}>
+	<a href="/inspeccion_unidades?id={{request.session.unidad}}"><i class="fa fa-eye fa-lg"></i>
+	<span class="text"> Inspección</span>
+	</a>
+	</li>
+	
+	<li class={%block Galeria%}""{%endblock%}>
+	<a href="/galeria"><i class="fa fa-camera fa-lg"></i>
+	<span class="text"> Galería</span>
+	</a>
+	</li>
+
+
+
+	<li class={%block logs%}""{%endblock%}>
+	<a href="/logs"><i class="fa fa-list-ol fa-lg"></i>
+	<span class="text"> Ver Logs</span>
+	</a>
+	</li>
+
+
+{%endif%}
+
+{%if request.session.organizativa == 'Transporte' %}
+
+	<li class={%block transporte%}""{%endblock%}>
+	<a href="/transporte"><i class="fa fa-ambulance fa-lg"></i>
+	<span class="text">Gestión del Transporte</span>
+	</a>
+	</li>
+
+{%endif%}
+
+{%if request.session.organizativa == 'Contabilidad' %}
+	<li class={%block activos%}""{%endblock%}>
+	<a href="/activos"><i class="fa fa-barcode fa-lg"></i>
+	<span class="text">Activos Fijos</span>
+	</a>
+	</li>
+{%endif%}
+
+
+{%if request.session.organizativa == 'Higiene' %}
+	<li class={%block higiene%}""{%endblock%}>
+	<a href="#" class="js-sub-menu-toggle"><i class="fa fa-flask fa-lg"></i></i><span class="text">Lucha Antivectorial</span><i class="toggle-icon fa fa-angle-left"></i>
+	</a>
+	<ul class="sub-menu {%block open_higiene%}{%endblock%}">
+	<li class={%block adulticida%}""{%endblock%}>
+	<a href="/info_tratamientoadulticida"><i class="fa fa-flask fa-lg"></i>
+	<span class="text">Tratamiento Adulticida</span>
+	</a>
+	</li>
+	<li class={%block focal%}""{%endblock%}>
+	<a href="/info_tratamientofocal"><i class="fa fa-search fa-lg"></i>
+	<span class="text">Tratamiento Focal</span>
+	</a>
+	</li>
+	<li class={%block centroscerrados%}""{%endblock%}>
+	<a href="/info_centroscerrados"><i class="fa fa-bank fa-lg"></i> <i class="fa fa-lock"></i>
+	<span class="text">Centros Cerrados</span>
+	</a>
+	</li>
+	<li class={%block centrospositivos%}""{%endblock%}>
+	<a href="/info_centrospositivos"><i class="fa fa-bank fa-lg"></i> <i class="fa fa-plus"></i>
+	<span class="text">Centros Positivos</span>
+	</a>
+	</li>
+	<li class={%block recursos%}""{%endblock%}>
+	<a href="/info_recursos"><i class="fa fa-gears fa-lg"></i>
+	<span class="text">Recursos</span>
+	</a>
+	</li>
+	</ul>
+</li>
+
+
+<li class={%block albopictus%}""{%endblock%}>
+<a href="/info_albopictus"><i class="fa fa-search fa-lg"></i>
+<span class="text">Albopictus</span>
+</a>
+</li>
+
+<li class={%block centrospriorizados%}""{%endblock%}>
+<a href="/info_centrospriorizados"><i class="fa fa-star fa-lg"></i>
+<span class="text">Centros Priorizados</span>
+</a>
+</li>
+
+
+
+{%endif%}
+
+
+
+
+
+
+{%if request.session.organizativa == 'Mantenimiento y Sistemas de Ingeniería' %}
+
+
+
+
+
+
+
+
+
+<li class={%block singenieros%}""{%endblock%}><a href="#" class="js-sub-menu-toggle"><i class="fa fa-edit fa-lg"></i><span class="text">Gestionar Subsistemas</span><i class="toggle-icon fa fa-angle-left"></i></a>
+
+
+
+
+
+<ul class="sub-menu {%block open_singenieros%}{%endblock%}">
+
+
+
+<li class={%block equipo_ascensores%}""{%endblock%}><a href="/ascensor"><i class="fa fa-angle-right fa-fw"></i><span class="text">Ascensores <strong>(ok)</strong></span></a></li>
+
+<li class={%block equipo_balas%}""{%endblock%}><a href="/balas"><i class="fa fa-angle-right fa-fw"></i><span class="text">balas (en proceso)</span></a></li>
+
+<li class={%block equipo_bombas%}""{%endblock%}><a href="/bombas"><i class="fa fa-angle-right fa-fw"></i><span class="text">bombas(en proceso)</span></a></li>
+
+<li class={%block equipo_calderas%}""{%endblock%}><a href="/calderas"><i class="fa fa-angle-right fa-fw"></i><span class="text">calderas(en proceso)</span></a></li>
+
+<li class={%block equipo_calentadores%}""{%endblock%}><a href="/calentadores"><i class="fa fa-angle-right fa-fw"></i><span class="text">calentadores(en proceso)</span></a></li>
+
+<li class={%block equipo_camaras%}""{%endblock%}><a href="/camaras"><i class="fa fa-angle-right fa-fw"></i><span class="text">camaras(en proceso)</span></a></li>
+
+<li class={%block equipo_celdas%}""{%endblock%}><a href="/celdas"><i class="fa fa-angle-right fa-fw"></i><span class="text">celdas(en proceso)</span></a></li>
+
+<li class={%block equipo_climaagua-aire%}""{%endblock%}><a href="/clima-agua-aire"><i class="fa fa-angle-right fa-fw"></i><span class="text">clima agua-aire(en proceso)</span></a></li>
+
+<li class={%block equipo_climacentral%}""{%endblock%}><a href="/clima-central"><i class="fa fa-angle-right fa-fw"></i><span class="text">clima central(en proceso)</span></a></li>
+
+<li class={%block equipo_climaconsolas%}""{%endblock%}><a href="/clima-consolas"><i class="fa fa-angle-right fa-fw"></i><span class="text">clima consolas(en proceso)</span></a></li>
+
+<li class={%block equipo_cocina%}""{%endblock%}><a href="/cocina"><i class="fa fa-angle-right fa-fw"></i><span class="text">cocina(en proceso)</span></a></li>
+
+<li class={%block equipo_gruposelectrogenos%}""{%endblock%}><a href="/grupo_electrogeno"><i class="fa fa-angle-right fa-fw"></i><span class="text">Grupos Electrogenos <strong>(ok)</strong></span></a></li>
+
+<li class={%block equipo_incinerador%}""{%endblock%}><a href="/incinerador"><i class="fa fa-angle-right fa-fw"></i><span class="text">incinerador(en proceso)</span></a></li>
+
+<li class={%block equipo_lavanderia%}""{%endblock%}><a href="/lavanderia"><i class="fa fa-angle-right fa-fw"></i><span class="text">lavanderia(en proceso)</span></a></li>
+
+<li class={%block equipo_suavisador%}""{%endblock%}><a href="/suavisador"><i class="fa fa-angle-right fa-fw"></i><span class="text">suavisador(en proceso)</span></a></li>
+
+</ul>
+
+
+
+
+
+
+
+</li>
+
+
+
+
+
+
+
+<li class={%block reporte_singenieros%}""{%endblock%}><a href="#" class="js-sub-menu-toggle"><i class="fa fa-file-pdf-o fa-lg"></i><span class="text">Reportes Especificos</span><i class="toggle-icon fa fa-angle-left"></i></a>
+
+<ul class="sub-menu {%block reporte_open_singenieros%}{%endblock%}">
+
+
+
+
+
+</ul>
+
+</li>
+
+
+
+
+
+
+
+<li class={%block grafico_singenieros%}""{%endblock%}><a href="#" class="js-sub-menu-toggle"><i class="fa fa-bar-chart-o fa-lg"></i><span class="text">Reportes Graficos</span><i class="toggle-icon fa fa-angle-left"></i></a>
+
+<ul class="sub-menu {%block grafico_open_singenieros%}{%endblock%}">
+
+
+
+
+
+</ul>
+
+</li>
+
+
+
+
+{%endif%}
+
+{%if request.session.organizativa == 'Docencia, investigación y metrología' %}
+	<li class={%block publicaciones%}""{%endblock%}>
+	<a href="/publicaciones"><i class="fa fa-book fa-lg"></i>
+	<span class="text"> Publicaciones</span>
+	</a>
+	</li>
+{%endif%}
+
+
+
+<li class={%block reclutas%}""{%endblock%}><a href="/recluta"><i class="fa fa-group fa-fw fa-lg"></i><span class="text">Reclutas</span></a></li>
+
+
+
+	</nav>
+
+<div class="sidebar-minified js-toggle-minified"><i class="fa fa-angle-left"></i></div>
+
+</div>
+
+{%endblock%}

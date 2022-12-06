@@ -1,0 +1,37 @@
+{% extends "generico.html" %}
+
+{% block ccs %}  {% block form_css %}{% endblock %} {% endblock %}
+{% block cuerpo %}
+
+    <form id='{% block form_nombre %}{% endblock %}' class="form-horizontal" enctype="multipart/form-data" method='post'
+          action=''>{% csrf_token %}
+
+        {% block modalclass %}
+            <div class="modal-dialog">
+        {% endblock %}
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                {% block close %}
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                {% endblock %}
+                <div class="text-center">
+
+                    <i class="fa {% block icono %}{% endblock %}-o fa-4x"></i>
+
+                    <h1 class="m-xs">{% block form_titulo %}{% endblock %}</h1></div>
+
+                <div class="modal-body">
+                    {% block form_cuerpo %}{% endblock %}
+
+                </div>
+                <div class="modal-footer">
+                    {% block form_botones %}{% endblock %}
+                </div>
+            </div>
+            {% block modalcierre %}
+                </div>
+            {% endblock %}
+    </form>
+
+{% endblock %}

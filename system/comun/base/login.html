@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{%block lugar%}Autenticación{%endblock%}
+{%block login%}
+{% load static %}
+
+
+	<div class="wrapper full-page-wrapper page-login text-center">
+		<div class="inner-page">
+			<div class="logo">
+			<div class="logo"><img src="{% static 'assets/img/logo.svg' %}" width="128" alt="" />
+			</div>
+			</div>
+			
+			<div class="login-box center-block">
+				
+
+
+
+
+
+
+<form id='form_unidad' class="form-horizontal" enctype="multipart/form-data" method='post' action=''>{% csrf_token%}
+					<p class="title">Indentifíquese</p>
+<div class="form-group">
+	<div class="col-sm-12">
+
+    <div class="input-group">
+
+<input id="id_username1" class="form-control" type="text" name="username1" maxlength="254" placeholder="Usuario"></input>
+<span class="input-group-addon">
+
+    <i class="fa fa-user"></i>
+
+</span>
+</div>
+</div>
+</div>
+
+<div class="form-group">
+		<div class="col-sm-12">
+
+    <div class="input-group">
+		
+		<input id="id_password1" class="form-control" type="password" name="password1" placeholder="Contraseña"></input>
+		
+<span class="input-group-addon">
+
+    <i class="fa fa-lock"></i>
+
+</span>
+</div>
+{%if error%}
+</div></div>
+<div class="col-sm-12">
+<span class='text-danger'>{{error}}.</span>
+<p/>
+    <div class="input-group">
+		</div></div>
+{%endif%}		
+<button class="btn btn-primary btn-lg btn-block btn-login"><i class="fa fa-arrow-circle-o-right"></i> Acceder</button>
+</form>
+
+
+
+
+
+
+			</div>
+			</div>
+		</div>
+		
+
+{%endblock%}

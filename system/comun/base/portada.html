@@ -1,0 +1,269 @@
+{% extends "menu_lateral.html" %}
+
+
+{%block head%}
+{% load static %}
+
+
+{%endblock%}
+
+
+
+
+{%block lugar%}Portada{%endblock%}
+{%block Inicio%}"active"{%endblock%}
+{%block formulario%}
+<div class="wrapper">
+<!-- BOTTOM: LEFT NAV AND RIGHT MAIN CONTENT -->
+<div class="bottom">
+<div class="container">
+<div class="row">
+<!-- content-wrapper -->
+<div class="col-md-12 content-wrapper">
+<div class="row">
+<div class="col-md-8 ">
+<div class="top-content">
+
+</div>
+</div>
+</div>
+
+<!-- main -->
+<div class="content">
+<div class="main-header">
+<h2>Panel Estadístico {{organizativa}}</h2>
+<em>{{unidad}}</em>
+</div>
+<div class="main-content">
+
+
+
+
+
+
+
+
+
+
+
+
+{%if request.session.organizativa == 'Planificación' %}	
+  <script src="{% static 'grafico/jquery.js' %}"></script>
+  <script src="{% static 'grafico/raphael-min.js' %}"></script>
+  <script src="{% static 'grafico/morris.js' %}"></script>
+  <script src="{% static 'grafico/prettify.js' %}"></script>
+  <script src="{% static 'grafico/example.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'grafico/morris.css' %}">
+  
+<script>
+    var day_data = [
+
+    {% for l in lav %}
+        {"elapsed": "{{l.producto}}", "value": {{l.cantidad}}},
+
+    {% endfor %}
+
+    ];
+    Morris.Line({
+    element: 'graph',
+    data: day_data,
+    xkey: 'elapsed',
+    ykeys: ['value'],
+    labels: ['value'],
+    parseTime: false
+    });
+    
+    
+    
+    var day_data = [
+
+    {% for a in ali %}
+        {"elapsed": "{{a.producto}}", "value": {{a.existencia}}},
+
+    {% endfor %}
+
+    ];
+    Morris.Line({
+    element: 'graph1',
+    data: day_data,
+    xkey: 'elapsed',
+    ykeys: ['value'],
+    labels: ['value'],
+    parseTime: false
+    });
+</script>
+
+  
+<div class="main-content">
+<div class="row">
+<div class="col-md-6">
+<h2>Gráficos de lavandería</h2>
+<h3>{{lav}}</h3>
+<div id="graph"></div>
+</div>
+<div class="col-md-6">
+
+<h2>Gráficos de alimentación</h2>
+<h3>{{ali}}</h3>
+
+<div id="graph1"></div>
+
+</div>
+</div>
+</div>
+
+
+
+{%endif%}
+
+
+
+
+
+
+
+
+
+
+
+
+{%if request.session.organizativa == 'Transporte' %}
+
+{% block transjs %}
+<script src="{% static 'raphael-min.js' %}"></script>
+<script src="{% static 'jquery-1.8.2.min.js' %}"></script>
+<script src="{% static 'morris-0.4.1.min.js' %}"></script>
+<script>
+Morris.Bar({
+  element: 'bar-example',
+  data: [
+    { y: 'Estado Técnico', a: {{ab}}, b: {{ar}}, c:{{am}} }
+  ],
+  xkey: 'y',
+  ykeys: ['a', 'b', 'c'],
+  labels: ['Bien', 'Regular', 'Mal']
+});
+</script>
+
+
+<script>
+Morris.Bar({
+  element: 'bar-example1',
+  data: [
+    { y: 'Estado Operativo', a: {{et}}, b: {{ep}}, c:{{eb}} }
+  ],
+  xkey: 'y',
+  ykeys: ['a', 'b', 'c'],
+  labels: ['Trabajando', 'Paralizados', 'Propuesta a Baja']
+});
+</script>
+{%endblock%}
+
+
+
+
+<div class="col-md-6 ">
+<div id="bar-example"></div>
+</div>
+
+<div class="col-md-6 ">
+<div id="bar-example1"></div>
+</div>
+
+{%endif%}
+
+
+
+
+
+
+{%if request.session.organizativa == 'Mantenimiento y Sistemas de Ingeniería' %}
+
+
+  <script src="{% static 'morris/jquery.min.js' %}"></script>
+  <script src="{% static 'morris/raphael-min.js' %}"></script>
+  <script src="{% static 'morris/morris.js' %}"></script>
+  <script src="{% static 'morris/prettify.min.js' %}"></script>
+  <script src="{% static 'morris/example.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'morris/morris.css' %}">
+
+<script id="code" class="prettyprint linenums">
+Morris.Bar({
+  element: 'graph',
+  data: [
+    {x: 'Ascensores', y: {{asceb}}, z: {{ascer}}, a: {{ascem}} }
+  ],
+  xkey: 'x',
+  ykeys: ['y', 'z', 'a'],
+  labels: ['Bien', 'Regular', 'Mal'],
+
+  barColors: ["#0BA438", "#EDC240", "#DF3D1E"],
+
+
+}).on('click', function(i, row){
+  console.log(i, row);
+});
+
+Morris.Bar({
+  element: 'graph1',
+  data: [
+    {x: 'Grupos Electrogenos', y: {{geb}}, z: {{ger}}, a: {{gem}} }
+  ],
+  xkey: 'x',
+  ykeys: ['y', 'z', 'a'],
+  barColors: ["#0BA438", "#EDC240", "#DF3D1E"],
+
+  labels: ['Bien', 'Regular', 'Mal']
+}).on('click', function(i, row){
+  console.log(i, row);
+});
+
+</script>
+
+
+
+
+<div class="row">
+<div class="col-md-3 ">
+<div id="graph"></div>
+</div>
+
+<div class="col-md-3 ">
+<div id="graph1"></div>
+</div>
+</div>
+
+
+
+
+
+
+
+{%endif%}
+
+
+
+
+
+</div>
+</div>
+<!-- /main -->
+
+
+
+
+
+
+</div>
+<!-- /content-wrapper -->
+</div>
+<!-- /row -->
+</div>
+<!-- /container -->
+</div>
+<!-- END BOTTOM: LEFT NAV AND RIGHT MAIN CONTENT -->
+<div class="push-sticky-footer"></div>
+</div>
+
+
+{% endblock %}
